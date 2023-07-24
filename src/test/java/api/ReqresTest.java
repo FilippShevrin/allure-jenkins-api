@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 
 import java.time.Clock;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ReqresTest {
 
-    
     @Test
     public void checkListAndTest(){
         Specifications.installSpecification(Specifications.requestSpec(Varibables.urlReqres),Specifications.responseSpecStatusCode(200));

@@ -17,12 +17,12 @@ public class PxstudioSaitTest {
         public void checkAvatarAndIdTest1() {
             Specifications.installSpecification(Specifications.requestSpec(Varibables.urlReqres),Specifications.responseSpecStatusCode(200));
 
-            Response response = given()
+            CatsFact response = given()
                     .when()
                     .get(urlCatFacts)
-                    .then()
-                    .extract().response();
-            List<CatsFact> ads = response.body().jsonPath().getList("fact", CatsFact.class);
+                    .then().log().all()
+                    .extract().as(CatsFact.class);
+
             int sa = 1;
         }
 
