@@ -25,7 +25,7 @@
         <owner.version>1.0.12</owner.version>
         <log4j.version>2.20.0</log4j.version>
         <slf4j.version>2.0.7</slf4j.version>
-        <allure.version>2.23.0</allure.version>
+        <allure.version>2.21.0</allure.version>
         <allure-maven.version>2.12.0</allure-maven.version>
         <aspectj.version>1.9.19</aspectj.version>
         <allure.cmd.download.url>
@@ -37,8 +37,6 @@
         <!-- Security override libraries -->
         <commons-codec.version>1.16.0</commons-codec.version>
         <jackson-databind.version>2.14.2</jackson-databind.version>
-
-
     </properties>
 
     <dependencies>
@@ -126,6 +124,11 @@
             <version>${allure.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-rest-assured</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -167,15 +170,21 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
-                    <systemProperties>
-                        <property>
-                            <name>allure.results.directory</name>
-                            <value>${project.build.directory}/allure-results</value>
-                        </property>
-                    </systemProperties>
+<!--                    <systemProperties>-->
+<!--                        <property>-->
+<!--                            <name>allure.results.directory</name>-->
+<!--                            <value>${project.build.directory}/allure-results</value>-->
+<!--                        </property>-->
+<!--                    </systemProperties>-->
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
+                    <systemPropertyVariables>
+                        <!--Allure result dir-->
+                        <allure.results.directory>
+                            ${project.build.directory}/allure-results
+                        </allure.results.directory>
+                    </systemPropertyVariables>
                 </configuration>
                 <dependencies>
                     <dependency>
