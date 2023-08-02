@@ -1,12 +1,12 @@
-package api;
+package api.MethodsTest;
 
 import api.reqresSait.*;
-import api.settings.Specifications;
+import api.settings.ConfigSteps;
 import api.settings.Varibables;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 
 import java.time.Clock;
 import java.util.HashMap;
@@ -21,14 +21,16 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class ReqresTest {
+public class ReqresStepMethods {
 
-    @Test
+
+    @DisplayName("ReqresTest-T1123")
     public void checkListAndTest(){
-        Specifications.installSpecification(Specifications.requestSpec(Varibables.urlReqres),Specifications.responseSpecStatusCode(200));
+        ConfigSteps.installSpecification(ConfigSteps.requestSpec(Varibables.urlReqres), ConfigSteps.responseSpecStatusCode(200));
+//        ConfigSteps.installSpecification(ConfigSteps.setUpRequestSpecifivation(Varibables.urlReqres), ConfigSteps.responseSpecStatusCode(200));
         List<ResponseUserDataPage2> users = given()
                 .when()
-                .get(urlReqresPage2)//post delete put get
+                .get(Varibables.urlReqresPage2)//post delete put get
                 .then()
                 .extract().body().jsonPath().getList("data.", ResponseUserDataPage2.class);
 
@@ -47,9 +49,9 @@ public class ReqresTest {
 
     }
 
-    @Test
+
     public void checkRegisterTest () {
-        Specifications.installSpecification(Specifications.requestSpec(Varibables.urlReqres),Specifications.responseSpecStatusCode(200));
+        ConfigSteps.installSpecification(ConfigSteps.requestSpec(Varibables.urlReqres), ConfigSteps.responseSpecStatusCode(200));
         Integer id = 4;
         String token = "QpwL5tke4Pnpja7X4";
          RequestRegister user = new RequestRegister("eve.holt@reqres.in","pistol");
@@ -70,7 +72,7 @@ public class ReqresTest {
 
     @Test
     public void checkUnRegisterTest () {
-        Specifications.installSpecification(Specifications.requestSpec(Varibables.urlReqres),Specifications.responseSpecStatusCode(400));
+        ConfigSteps.installSpecification(ConfigSteps.requestSpec(Varibables.urlReqres), ConfigSteps.responseSpecStatusCode(400));
         Integer id = 4;
         String token = "QpwL5tke4Pnpja7X4";
          RequestRegister user = new RequestRegister("sydney@fife","");
@@ -87,9 +89,9 @@ public class ReqresTest {
     }
 //сравнение по годам
 
-    @Test
+
     public void checkYearNext(){
-        Specifications.installSpecification(Specifications.requestSpec(Varibables.urlReqres),Specifications.responseSpecStatusCode(200));
+        ConfigSteps.installSpecification(ConfigSteps.requestSpec(Varibables.urlReqres), ConfigSteps.responseSpecStatusCode(200));
         List<ResponseListResourseData> users = given()
                 .when()
                 .get(Varibables.urlResourse)//post delete put get
@@ -103,20 +105,19 @@ public class ReqresTest {
         }
     }
 
-    @Test
+
     public void checkdelete(){
-        Specifications.installSpecification(Specifications.requestSpec(Varibables.urlReqres),Specifications.responseSpecStatusCode(204));
+        ConfigSteps.installSpecification(ConfigSteps.requestSpec(Varibables.urlReqres), ConfigSteps.responseSpecStatusCode(204));
         given()
                 .when()
                 .delete(Varibables.urlDelete);
     }
 
-    //Сравнить дату на компьютере с датой на сервере
 
 
-    @Test
+
     public void checkDatainServerAndJVM(){ // не надежно!  часто время разнится
-        Specifications.installSpecification(Specifications.requestSpec(Varibables.urlReqres),Specifications.responseSpecStatusCode(200));
+        ConfigSteps.installSpecification(ConfigSteps.requestSpec(Varibables.urlReqres), ConfigSteps.responseSpecStatusCode(200));
         RequestUpdate userTime = new RequestUpdate();
         userTime.setJob("zion resident");
         userTime.setName("morpheus");
@@ -137,9 +138,9 @@ public class ReqresTest {
 //    assertEquals(currentTime,register.getUpdatedAt().replaceAll(regex,""),"Ошибка, время сервера :"+ currentTime + " время запроса :"+register.getUpdatedAt().replaceAll(regex,""));
     }
 
-    @Test
+
     public void checkAvatarsNoPojoTest(){
-        Specifications.installSpecification(Specifications.requestSpec(Varibables.urlReqres),Specifications.responseSpecStatusCode(200));
+        ConfigSteps.installSpecification(ConfigSteps.requestSpec(Varibables.urlReqres), ConfigSteps.responseSpecStatusCode(200));
         Response response = given()
                 .when()
                 .get(urlReqresPage2)
@@ -162,9 +163,9 @@ public class ReqresTest {
         int a = 0 ;
     }
 
-    @Test
+
     public void checkRegisterNoPojoTest () {
-        Specifications.installSpecification(Specifications.requestSpec(Varibables.urlReqres),Specifications.responseSpecStatusCode(200));
+        ConfigSteps.installSpecification(ConfigSteps.requestSpec(Varibables.urlReqres), ConfigSteps.responseSpecStatusCode(200));
         Map<String,String> user = new HashMap<>();
         user.put("email", "eve.holt@reqres.in");
         user.put("password", "pistol");
@@ -180,9 +181,9 @@ public class ReqresTest {
                 .extract().as(ResponseRegister.class);
     }
 
-    @Test
+
     public void checkRegister2NoPojoTest () {
-        Specifications.installSpecification(Specifications.requestSpec(Varibables.urlReqres),Specifications.responseSpecStatusCode(200));
+        ConfigSteps.installSpecification(ConfigSteps.requestSpec(Varibables.urlReqres), ConfigSteps.responseSpecStatusCode(200));
         Map<String,String> user = new HashMap<>();
         user.put("email", "eve.holt@reqres.in");
         user.put("password", "pistol");
@@ -202,9 +203,9 @@ public class ReqresTest {
 
     }
 
-    @Test
+
     public void checkUnRegisterNoPojoTest () {
-        Specifications.installSpecification(Specifications.requestSpec(Varibables.urlReqres),Specifications.responseSpecStatusCode(400));
+        ConfigSteps.installSpecification(ConfigSteps.requestSpec(Varibables.urlReqres), ConfigSteps.responseSpecStatusCode(400));
        Map<String,String> user = new HashMap<>();
        user.put("email","sydney@fife");
 
@@ -221,7 +222,7 @@ public class ReqresTest {
 
     @Test
     public void checkUnRegister2NoPojoTest () {
-        Specifications.installSpecification(Specifications.requestSpec(Varibables.urlReqres),Specifications.responseSpecStatusCode(400));
+        ConfigSteps.installSpecification(ConfigSteps.requestSpec(Varibables.urlReqres), ConfigSteps.responseSpecStatusCode(400));
         Map<String,String> user = new HashMap<>();
         user.put("email","sydney@fife");
 
