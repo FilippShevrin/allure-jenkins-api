@@ -8,6 +8,8 @@ import api.settings.ConfigurationConnection;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.util.ArrayList;
+
 public class AbstractApiTest {
     protected ConfigSteps configSteps;
 
@@ -20,6 +22,9 @@ public class AbstractApiTest {
 //        configSteps = new ConfigSteps();
 //        configSteps.setUpRequestSpecifivation(configurationConnect.urlReqres());
 //    }
+
+
+
     @BeforeEach
     public void setUp() {
         reqresStepMethods = new ReqresStepMethods();
